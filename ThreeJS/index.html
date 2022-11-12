@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全景图</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+    <script src="./js/three.js"></script>
+    <script src="./js/OrbitControls.js"></script>
+</head>
+<body>
+    <script type="module">
+        import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+        import { VRButton } from 'https://unpkg.com/three/examples/jsm/webxr/VRButton.js';
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        const scene = new THREE.Scene();
+        const renderer = new THREE.WebGLRenderer({antialias: true});
+        const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+
+        camera.position.set(0,0, 100);
+        camera.lookAt(scene.position);
+        scene.add(camera);
+
+        renderer.setSize(width, height);
+        renderer.xr.enabled = true;
+        renderer.setAnimationLoop(render);
+        document.body.appendChild(renderer.domElement)
+        document.body.appendChild(VRButton.createButton(renderer));
+        
+        function create() {
+            let urls = [
+                './img/home.left.jpg',
+                './img/home.right.jpg',
+                './img/home.top.jpg',
+                './img/home.bottom.jpg',
+                './img/home.front.jpg',
+                './img/home.back.jpg'
+            ];
+            let cubeTexture = new THREE.CubeTextureLoader().load(urls);
+            scene.background = cubeTexture;
+        }
+
+        function render() {
+            renderer.render(scene, camera);
+            //开启XR模式后，不能使用requestAnimationFrame,而要使用setAnimationLoop
+            // requestAnimationFrame(render);
+        }
+
+        create();
+        render();
+    const controls = new THREE.OrbitControls(camera);
+
+</script>
+</body>
+</html>
