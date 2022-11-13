@@ -34,22 +34,21 @@
         document.body.appendChild(VRButton.createButton(renderer));
         
         function create() {
-            let urls = [
-                './img/home.left.jpg',
-                './img/home.right.jpg',
-                './img/home.top.jpg',
-                './img/home.bottom.jpg',
-                './img/home.front.jpg',
-                './img/home.back.jpg'
-            ];
-            let cubeTexture = new THREE.CubeTextureLoader().load(urls);
-            scene.background = cubeTexture;
+            //需要一个球体的网格
+            var geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
+            //然后对网格进行x轴反转，使所有的面点向内。
+            geometry.scale(  -1, 1, 1 );
+            //我们需要的是从球内去看球，所以，将面的显示朝向都朝向中心。
+            //然后我们将纹理图片加载，生成纹理，供网格使用，并添加到场景中
+            var material = new THREE.MeshBasicMaterial( {
+                map: new THREE.TextureLoader().load( './img/pic2.jpg' ) //加载一整张纹理图片
+            } );
+            const mesh = new THREE.Mesh( geometry, material );
+            scene.add( mesh );
         }
 
         function render() {
             renderer.render(scene, camera);
-            //开启XR模式后，不能使用requestAnimationFrame,而要使用setAnimationLoop
-            // requestAnimationFrame(render);
         }
 
         create();
