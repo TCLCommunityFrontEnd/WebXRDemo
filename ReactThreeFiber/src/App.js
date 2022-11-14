@@ -1,39 +1,4 @@
-// import { Suspense } from 'react'
-import { VRButton, XR, Controllers, Hands } from '@react-three/xr'
-// import { Canvas,useLoader } from '@react-three/fiber'
-// import { TextureLoader } from 'three/src/loaders/TextureLoader'
-
-
-// function App() {
-//   const imgMap = useLoader(TextureLoader, 'pic2.jpg')
-//   return (
-//     <>
-//       <VRButton />
-//       <Canvas 
-//         // camera={{position: [0, 0, 100], fov: 45, near: 0.1, far: 1000}} 
-//         style={{width:window.innerWidth,height:window.innerHeight}}>
-//         <XR>
-//           <Controllers />
-//           <Hands />
-//           <Suspense fallback={null}>
-//           <mesh>
-//             {/* <sphereGeometry 
-//               args={[20,60,40]}
-//               // args={[500, 60, 40]} 
-//               scale={[1, 1, 1]}
-//             /> */}
-//              <sphereGeometry args={[1, 32, 32]} />
-//             <meshStandardMaterial 
-//               map={imgMap} 
-//               // color={'blue'}
-//             />
-//           </mesh>
-//           </Suspense>
-//         </XR>
-//       </Canvas>
-//     </>
-//   )
-// }
+import { VRButton, XR} from '@react-three/xr'
 import React, { Suspense, useRef } from "react";
 import { Canvas, useLoader,useFrame,useThree,extend } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
@@ -78,9 +43,9 @@ function App() {
     >
        <XR>
        <CameraControls />
-        {/* <Suspense fallback={null}> */}
+        <Suspense fallback={null}>
           <Scene />
-        {/* </Suspense> */}
+        </Suspense>
       </XR>
     </Canvas>
     </>
