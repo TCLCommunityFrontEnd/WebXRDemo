@@ -17,7 +17,6 @@ const CameraControls = () => {
 
 function Scene() {
   const colorMap = useLoader(TextureLoader, 'pic2.jpg')
-
   return (
     <>
       <ambientLight intensity={0.2} />
@@ -53,3 +52,4 @@ function App() {
 }
 
 export default App;
+
